@@ -1,2 +1,2 @@
-# modern-react
-Skeleton for modern React Applications
+# Modern React
+A skeleton React application that contains bleeding edge technologies for 2017.

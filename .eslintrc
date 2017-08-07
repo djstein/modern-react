@@ -1,0 +1,25 @@
+{
+  "parser": "babel-eslint",
+   "env": {
+        es6: true,
+        browser: true
+  },
+  "parserOptions": {
+    ecmaversion: 6,
+    sourceType: "module",
+    ecmaFeatuers: {
+        jsx: true,
+        experimentalObjectRestSpread: true
+    },
+  },
+  "extends": ["plugin:jsx-a11y/recommended", "eslint:recommended", "plugin:react/recommended", "standard"],
+  "plugins": [
+    "jsx-a11y", "react"
+  ],
+  "rules": {
+      "no-console": [2, {allow: ["warn", "error"]}],
+      "react/jsx-filename-extension": 0,
+      "space-before-function-paren": 0,
+      "semi": [2, "always"]
+  }
+}

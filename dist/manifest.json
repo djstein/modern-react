@@ -1,0 +1,13 @@
+{
+  "short_name": "Modern React Skeleton",
+  "name": "Modern React Skeleton Application",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+}
