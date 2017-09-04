@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PreviewContent from '../components/BaseComponent';
+import BaseComponent from '../components/BaseComponent';
 import { connect } from 'react-redux';
 
 class PreviewContainer extends Component {

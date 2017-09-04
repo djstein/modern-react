@@ -1,6 +1,6 @@
 import BaseContainer from '../containers/BaseContainer';
 
-import NavBarLayout from '../layouts/BaseLayout';
+import BaseLayout from '../layouts/BaseLayout';
 
 export const routes = [
   {
