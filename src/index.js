@@ -8,13 +8,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import rootReducer from './reducers';
+import rootReducer from './app/reducers';
 
 import { ThemeProvider } from 'styled-components';
-import { Theme } from './bento_components/src';
+import { Theme } from './styled_components/src';
 
-import { renderRoutes } from './routes/RenderRoutes';
-import { routes } from './routes/routes';
+import { renderRoutes } from './app/routes/RenderRoutes';
+import { routes } from './app/routes/routes';
 
 const basename = process.env.NODE_ENV === 'production'
   ? '/app/'

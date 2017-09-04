@@ -1,4 +1,4 @@
-import BaseContainer from '../app/containers/BaseContainer';
+import BaseContainer from '../containers/BaseContainer';
 
 import NavBarLayout from '../layouts/BaseLayout';
 
