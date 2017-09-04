@@ -6,13 +6,15 @@ const LAUNCH_COMMAND = process.env.npm_lifecycle_event;
 const isProduction = LAUNCH_COMMAND === 'build';
 process.env.BABEL_ENV = LAUNCH_COMMAND;
 
+const STATIC_URL = isProduction ? '/app/' : '/';
+
 const PATHS = {
   src: path.join(__dirname, 'src'),
   dist: path.join(__dirname, 'dist')
 };
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: path.join(__dirname, '/dist/index.html'),
+  template: path.join(__dirname, '/src/index.html'),
   filename: 'index.html',
   inject: 'body'
 });
@@ -27,7 +29,8 @@ const base = {
   entry: './src/index.js',
   output: {
     filename: 'express-web-builder-bundle.js',
-    path: PATHS.dist
+    path: PATHS.dist,
+    publicPath: STATIC_URL
   },
   module: {
     rules: [
@@ -56,10 +59,11 @@ const base = {
 const developmentConfig = {
   devtool: 'cheap-module-inline-source-map',
   devServer: {
-    allowedHosts: ['localtest.me'],
+    allowedHosts: ['localhost'],
     contentBase: PATHS.dist,
     hot: true,
-    inline: true
+    inline: true,
+    historyApiFallback: true
   },
   plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]
 };

@@ -1,9 +1,11 @@
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
+export featureReducer from './featureReducer';
+
 const rootReducer = combineReducers({
-    // import and use other feature's reducers here
-    router: routerReducer
+  featureReducer,
+  router: routerReducer
 });
 
 export default rootReducer;

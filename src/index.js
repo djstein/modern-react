@@ -2,41 +2,50 @@ import createHistory from 'history/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router';
-import {
-    ConnectedRouter,
-    routerReducer,
-    routerMiddleware,
-    push
-} from 'react-router-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Switch } from 'react-router-dom';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
-import LoadHome from './feature/containers/LoadHome';
-import registerServiceWorker from './registerServiceWorker';
 
-const history = createHistory();
+import { ThemeProvider } from 'styled-components';
+import { Theme } from './bento_components/src';
+
+import { renderRoutes } from './routes/RenderRoutes';
+import { routes } from './routes/routes';
+
+const basename = process.env.NODE_ENV === 'production'
+  ? '/app/'
+  : '/';
+const history = createHistory({
+  basename
+});
+
 const historyMiddleware = routerMiddleware(history);
 const loggerMiddleware = createLogger();
 
-const middleware = { historyMiddleware, loggerMiddleware, thunkMiddleware };
+const middleware = { historyMiddleware, loggerMiddleware };
 
-const store = createStore(rootReducer, applyMiddleware(...middleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(...middleware, thunk))
+);
 
 // Required by Axios
 require('es6-promise').polyfill();
 
-registerServiceWorker();
-
 ReactDOM.render(
-    <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <div>
-                <Route exact path="/" component={LoadHome} />
-            </div>
-        </ConnectedRouter>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <ConnectedRouter history={history} basename={basename}>
+      <ThemeProvider theme={Theme}>
+        <Switch>
+          {renderRoutes(routes)}
+        </Switch>
+      </ThemeProvider>
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('app')
 );
